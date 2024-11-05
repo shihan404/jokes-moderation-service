@@ -2,22 +2,22 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
-const jokeRoutes = require("./routes/jokes");
-const authRoutes = require("./routes/auth");
+const jokeRoutes = require("./src/routes/jokes");
+const authRoutes = require("./src/routes/auth");
 require("dotenv").config();
 const { PORT } = require("./config");
 
 const app = express();
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: "Too many requests from this IP, please try again later.",
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: "Too many requests from this IP, please try again later.",
 });
 
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 50,
+    windowMs: 15 * 60 * 1000,
+    max: 50,
 });
 
 // Middleware
@@ -32,15 +32,15 @@ app.use("/api/jokes", jokeRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    message: "Something went wrong!",
-    error: process.env.NODE_ENV === "development" ? err.message : undefined,
-  });
+    console.error(err.stack);
+    res.status(500).json({
+        message: "Something went wrong!",
+        error: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
 });
 
 app.listen(PORT, () => {
-  console.log(`Moderate Service running on port ${PORT}`);
+    console.log(`Moderate Service running on port ${PORT}`);
 });
 
 module.exports = app;

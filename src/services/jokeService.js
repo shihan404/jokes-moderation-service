@@ -18,7 +18,7 @@ class JokesService {
         content,
         type,
       });
-
+      console.log("save and delete");
       // Delete from submit service
       await axios.delete(`${SUBMIT_SERVICE_URL}/jokes/${jokeId}`);
     } catch (error) {
@@ -28,7 +28,7 @@ class JokesService {
 
   async rejectJoke(jokeId) {
     try {
-      await axios.delete(`${SUBMIT_SERVICE_URL}/api/jokes/${jokeId}`);
+      await axios.delete(`${SUBMIT_SERVICE_URL}/jokes/${jokeId}`);
     } catch (error) {
       throw new Error("Failed to reject joke");
     }
