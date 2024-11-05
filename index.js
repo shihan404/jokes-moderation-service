@@ -5,7 +5,7 @@ const rateLimit = require("express-rate-limit");
 const jokeRoutes = require("./src/routes/jokes");
 const authRoutes = require("./src/routes/auth");
 require("dotenv").config();
-const { PORT } = require("./config");
+const { PORT } = require("./src/config");
 
 const app = express();
 
